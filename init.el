@@ -228,8 +228,6 @@
 (setq elfeed-feeds
       '("https://news.ycombinator.com/rss"))
 
-;; Setup for magit
-;;(setq magit-last-seen-setup-instructions "1.4.0")
 
 ;; Switch on rainbow-delimiters-mode
 (require 'rainbow-delimiters)
