@@ -3,6 +3,8 @@ ZSH=$HOME/.oh-my-zsh
 BASH_ALIAS=$HOME/.bash_aliases
 DEFAULT_USER=$USER
 
+export TERM=xterm-256color
+
 # Set name of the theme to load.
 # Look in ~/.oh-my-zsh/themes/
 # Optionally, if you set this to "random", it'll load a random theme each
@@ -44,8 +46,19 @@ ZSH_THEME="clean"
 # Example format: plugins=(rails git textmate ruby lighthouse)
 plugins=(git archlinux git-extras history history-substring-search python rsync virtualenv vagrant sudo pip jsontools npm quote tmux extract fbterm)
 
+export PATH=$PATH:/home/zoso/Projects/android-sdk/tools:/home/zoso/Projects/android-sdk/build-tools/23.0.1:/home/zoso/Projects/ndk
+export ANDROID_HOME="/home/zoso/Projects/android-sdk"
+export JAVA_HOME=""
+export DEVKIT_ANDROID_KEYSTORE="/home/zoso/.android/hashcube.keystore"
+export DEVKIT_ANDROID_STOREPASS="why20hash!"
+export DEVKIT_ANDROID_KEYPASS="why20hash!"
+export DEVKIT_ANDROID_KEY="hashcube"
+
 source $ZSH/oh-my-zsh.sh
 
+if [[ -f /usr/lib/python2.7/site-packages/powerline/bindings/zsh/powerline.zsh ]]; then
+	  source /usr/lib/python2.7/site-packages/powerline/bindings/zsh/powerline.zsh
+fi
 # Customize to your needs...
 # TMUX
 if which tmux >/dev/null 2>&1; then

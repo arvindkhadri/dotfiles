@@ -8,42 +8,77 @@
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  '(android-mode-sdk-dir "/home/zoso/Projects/opt/android-sdk-linux")
+ '(ansi-color-faces-vector
+   [default bold shadow italic underline bold bold-italic bold])
+ '(ansi-color-names-vector
+   (vector "#839496" "#dc322f" "#859900" "#b58900" "#268bd2" "#d33682" "#2aa198" "#002b36"))
  '(css-indent-offset 2)
+ '(custom-enabled-themes (quote (sanityinc-solarized-light)))
+ '(custom-safe-themes
+   (quote
+    ("4cf3221feff536e2b3385209e9b9dc4c2e0818a69a1cdb4b522756bcdf4e00a4" "4aee8551b53a43a883cb0b7f3255d6859d766b6c5e14bcb01bed572fcbef4328" default)))
  '(custom-theme-directory "~/.emacs.d/themes/")
+ '(fci-rule-color "#073642")
  '(flycheck-python-flake8-executable "/usr/bin/flake8-python2")
  '(js3-auto-indent-p t)
- '(js3-boring-indentation nil)
+ '(js3-boring-indentation t)
  '(js3-consistent-level-indent-inner-bracket t)
  '(js3-curly-indent-offset 0)
  '(js3-enter-indents-newline t)
  '(js3-expr-indent-offset 2)
  '(js3-indent-dots t)
  '(js3-indent-on-enter-key t)
- '(js3-indent-tabs-mode t)
+ '(js3-indent-tabs-mode nil)
+ '(js3-label-indent-offset 0)
  '(js3-lazy-commas t)
  '(js3-lazy-dots t)
  '(js3-lazy-operators t)
  '(js3-lazy-semicolons t)
- '(js3-paren-indent-offset 2)
+ '(js3-manual-indentation t)
+ '(js3-paren-indent-offset 0)
  '(js3-pretty-vars-spaces 2)
- '(js3-square-indent-offset 2)
+ '(js3-square-indent-offset 0)
  '(json-reformat:indent-width 2)
+ '(org-agenda-files (quote ("~/Projects/Orgfiles/agenda.org")) t)
  '(org-html-use-infojs t)
  '(py-shell-name "/usr/bin/ipython")
  '(python-indent-guess-indent-offset nil)
  '(python-indent-offset 4)
- '(safe-local-variable-values (quote ((todo-categories "Important" "Todo")))))
+ '(safe-local-variable-values (quote ((todo-categories "Important" "Todo"))))
+ '(vc-annotate-background nil)
+ '(vc-annotate-color-map
+   (quote
+    ((20 . "#dc322f")
+     (40 . "#cb4b16")
+     (60 . "#b58900")
+     (80 . "#859900")
+     (100 . "#2aa198")
+     (120 . "#268bd2")
+     (140 . "#d33682")
+     (160 . "#6c71c4")
+     (180 . "#dc322f")
+     (200 . "#cb4b16")
+     (220 . "#b58900")
+     (240 . "#859900")
+     (260 . "#2aa198")
+     (280 . "#268bd2")
+     (300 . "#d33682")
+     (320 . "#6c71c4")
+     (340 . "#dc322f")
+     (360 . "#cb4b16"))))
+ '(vc-annotate-very-old-color nil))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- )
+ '(neo-file-link-face ((t (:foreground "white")))))
 
 ;;;;; Code:
 (add-to-list 'auto-mode-alist '("\\.wsgi$" . python-mode))
 (add-to-list 'auto-mode-alist '("\\.js$" . js3-mode))
 (add-to-list 'auto-mode-alist '("zshrc" . conf-mode))
+(add-to-list 'auto-mode-alist '("\\.json$" . js3-mode))
 
 ;;Line numbers by default
 (require 'linum)
@@ -142,6 +177,8 @@
 (autoload 'ibuffer "ibuffer" "List buffers." t)
 
 ;;indentation and tab setup
+;; set tabs mode to be disabled, DO NOT MIX tabs and spaces ever!
+(setq-default indent-tabs-mode nil)
 (setq-default tab-width 2)
 (setq-default standard-indent 4)
 (setq-default tab-stop-list '(0 4 8 12 16 20 24 28 32))
@@ -212,6 +249,9 @@
 ;;Set magit-status to bind with f6
 (global-set-key [f6] 'magit-status)
 
+;; Set neotree-toggle to bind with f8
+(global-set-key [f8] 'neotree-toggle)
+
 ;;Set C-cd to bind with delete-region
 (global-set-key (kbd "\C-d") 'delete-region)
 
@@ -236,14 +276,16 @@
 
 ;; Set android-mode sdk dir
 (require 'android-mode)
-(custom-set-variables '(android-mode-sdk-dir "/home/zoso/Projects/opt/android-sdk-linux"))
+
+;; Set keybinding for vc-git-grep
+(global-set-key (kbd "\C-x v f") 'vc-git-grep)
 
 ;; Scrum boards in org
 ;; (load-file "/home/zoso/Projects/awesome/scrum.el")
 ;; (require 'scrum)
 
 ;; Load gh-md.el
-(load-file "/home/zoso/Projects/awesome/gh-md.el")
+(load-file "/home/zoso/Projects/dotfiles/gh-md.el")
 (require 'gh-md)
 
 ;;init.el ends here
