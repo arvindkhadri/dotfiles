@@ -12,6 +12,7 @@
    [default bold shadow italic underline bold bold-italic bold])
  '(ansi-color-names-vector
    (vector "#839496" "#dc322f" "#859900" "#b58900" "#268bd2" "#d33682" "#2aa198" "#002b36"))
+ '(c-basic-offset 2)
  '(css-indent-offset 2)
  '(custom-enabled-themes (quote (sanityinc-solarized-light)))
  '(custom-safe-themes
@@ -19,28 +20,14 @@
     ("4cf3221feff536e2b3385209e9b9dc4c2e0818a69a1cdb4b522756bcdf4e00a4" "4aee8551b53a43a883cb0b7f3255d6859d766b6c5e14bcb01bed572fcbef4328" default)))
  '(custom-theme-directory "~/.emacs.d/themes/")
  '(fci-rule-color "#073642")
+ '(flycheck-phpcs-standard "Drupal,DrupalPractice")
  '(flycheck-python-flake8-executable "/usr/bin/flake8-python2")
- '(js3-auto-indent-p t)
- '(js3-boring-indentation t)
- '(js3-consistent-level-indent-inner-bracket t)
- '(js3-curly-indent-offset 0)
- '(js3-enter-indents-newline t)
- '(js3-expr-indent-offset 2)
- '(js3-indent-dots t)
- '(js3-indent-on-enter-key t)
- '(js3-indent-tabs-mode nil)
- '(js3-label-indent-offset 0)
- '(js3-lazy-commas t)
- '(js3-lazy-dots t)
- '(js3-lazy-operators t)
- '(js3-lazy-semicolons t)
- '(js3-manual-indentation t)
- '(js3-paren-indent-offset 0)
- '(js3-pretty-vars-spaces 2)
- '(js3-square-indent-offset 0)
+ '(js2-basic-offset 2)
+ '(js2-bounce-indent-p t)
  '(json-reformat:indent-width 2)
- '(org-agenda-files (quote ("~/Projects/Orgfiles/agenda.org")) t)
+ '(org-agenda-files (quote ("~/Projects/Orgfiles/test.org")) t)
  '(org-html-use-infojs t)
+ '(php-mode-coding-style (quote drupal))
  '(py-shell-name "/usr/bin/ipython")
  '(python-indent-guess-indent-offset nil)
  '(python-indent-offset 4)
@@ -76,9 +63,9 @@
 
 ;;;;; Code:
 (add-to-list 'auto-mode-alist '("\\.wsgi$" . python-mode))
-(add-to-list 'auto-mode-alist '("\\.js$" . js3-mode))
+(add-to-list 'auto-mode-alist '("\\.js$" . js2-mode))
 (add-to-list 'auto-mode-alist '("zshrc" . conf-mode))
-(add-to-list 'auto-mode-alist '("\\.json$" . js3-mode))
+(add-to-list 'auto-mode-alist '("\\.json\\'" . js2-mode))
 
 ;;Line numbers by default
 (require 'linum)
@@ -288,4 +275,33 @@
 (load-file "/home/zoso/Projects/dotfiles/gh-md.el")
 (require 'gh-md)
 
-;;init.el ends here
+;; Set hooks of js2-mode for jscs
+(add-hook 'js2-mode-hook #'jscs-indent-apply)
+
+;; Set keybinding for split-window-horizontal/vertical
+(global-set-key (kbd "\C-x -") 'split-window-vertically)
+(global-set-key (kbd "\C-x |") 'split-window-horizontally)
+
+;; Set offset of case label in c-mode
+;; php-mode uses c-mode vars \o/
+(add-hook 'php-mode-hook
+          (lambda () (c-set-offset 'case-label 2)))
+;; Enable smartparens in all the buffers
+(require 'smartparens)
+('smartparens-global-mode 1)
+
+;; Customize php-mode to use ac-php for auto completion
+(require 'cl)
+(require 'php-mode)
+(add-hook 'php-mode-hook
+          '(lambda ()
+             (auto-complete-mode t)
+             (require 'ac-php)
+             ;;(setq ac-php-use-cscope-flag  t ) ;;enable cscope
+             (setq ac-sources  '(ac-source-php ) )
+             (yas-global-mode 1)
+             (define-key php-mode-map  (kbd "C-]") 'ac-php-find-symbol-at-point)   ;goto define
+             (define-key php-mode-map  (kbd "C-t") 'ac-php-location-stack-back   ) ;go back
+             ))
+(provide 'init)
+;;; init.el ends here

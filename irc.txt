@@ -1,2 +1,1 @@
-LOAD /home/zoso/Projects/dotfiles/cloak.pl
 CloakAndJoin #c,#c++,#emacs,#emacs-in,#alipi,#pantoto-mongo,#linux,#c,#programming,#python,##javascript,#rtems,#git,#amclug,#pocoo,#linux-india,#three.js,##philosophy,#b-a-s,#openlayers,#zsh,#documentcloud,#web,#archlinux

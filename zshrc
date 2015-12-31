@@ -44,7 +44,7 @@ ZSH_THEME="clean"
 # Which plugins would you like to load? (plugins can be found in ~/.oh-my-zsh/plugins/*)
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
-plugins=(git archlinux git-extras history history-substring-search python rsync virtualenv vagrant sudo pip jsontools npm quote tmux extract fbterm)
+plugins=(git archlinux git-extras history history-substring-search python rsync virtualenv vagrant sudo pip jsontools npm quote tmux extract fbterm systemd)
 
 export PATH=$PATH:/home/zoso/Projects/android-sdk/tools:/home/zoso/Projects/android-sdk/build-tools/23.0.1:/home/zoso/Projects/ndk
 export ANDROID_HOME="/home/zoso/Projects/android-sdk"
